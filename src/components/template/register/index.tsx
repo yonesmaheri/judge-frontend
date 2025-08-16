@@ -1,4 +1,4 @@
-import { LoginFormData } from "@/app/login/page";
+import { RegisterFormData } from "@/app/register/page";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,15 +14,28 @@ import { UseFormReturn } from "react-hook-form";
 
 
 type Props = {
-  form: UseFormReturn<LoginFormData>
+  form: UseFormReturn<RegisterFormData>
   isPending:boolean
   onSubmit: (data:any)=> void
 }
 
-function LoginPageTemplate({form,isPending,onSubmit}:Props) {
+function RegisterPageTemplate({form,isPending,onSubmit}:Props) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>نام</FormLabel>
+              <FormControl>
+                <Input placeholder="نام خود را وارد کنید" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="username"
@@ -54,11 +67,11 @@ function LoginPageTemplate({form,isPending,onSubmit}:Props) {
           )}
         />
         <Button type="submit" disabled={isPending}>
-          {isPending ? "در حال ورود..." : "ورود"}
+          {isPending ? "..." : "ثبت نام"}
         </Button>
       </form>
     </Form>
   );
 }
 
-export default LoginPageTemplate;
+export default RegisterPageTemplate;

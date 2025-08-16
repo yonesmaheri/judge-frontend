@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import { ReactQueryProvider } from "@/components/module/provider";
+import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/module/navbar";
 
 const vazir = Vazirmatn({
   variable: "--font-vazir",
@@ -23,7 +25,11 @@ export default function RootLayout({
       <body
         className={`${vazir.className} bg-gray-100 text-gray-900 antialiased`}
       >
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <Navbar/>
+          {children}
+          </ReactQueryProvider>
+        <Toaster/>
       </body>
     </html>
   );

@@ -3,35 +3,38 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLogin } from "@/lib/services/auth";
-import LoginPageTemplate from "@/components/template/login";
+import { useRegister } from "@/lib/services/auth";
+import RegisterPageTemplate from "@/components/template/register";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const loginSchema = z.object({
+const registerSchema = z.object({
+  name: z.string().min(3, "وارد کردن نام الزامی است"),
   username: z.string().min(3, "وارد کردن نام کاربری الزامی است"),
   password: z.string().min(6, "رمز عبور باید حداقل ۶ کاراکتر باشد"),
 });
 
-export type LoginFormData = z.infer<typeof loginSchema>;
+export type RegisterFormData = z.infer<typeof registerSchema>;
 
-export default function LoginPage() {
-  const router = useRouter();
+export default function RegisterPage() {
 
-  const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  const router = useRouter()
+
+  const form = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
+      name: "",
       username: "",
       password: "",
     },
   });
 
-  const { mutate, isPending } = useLogin();
+  const { mutate, isPending } = useRegister();
 
-  const onSubmit = (values: LoginFormData) => {
-    mutate(values, {
+  const onSubmit = (values: RegisterFormData) => {
+    mutate(values,{
       onSuccess() {
-        router.push("/");
+        router.push('/')
       },
     });
   };
@@ -40,14 +43,14 @@ export default function LoginPage() {
     <div dir="rtl" className="flex justify-center items-center h-screen">
       <div className="w-96 bg-white shadow-md rounded p-6">
         <div className="w-full flex flex-col items-center justify-center gap-4">
-          <LoginPageTemplate
+          <RegisterPageTemplate
             form={form}
             isPending={isPending}
             onSubmit={onSubmit}
           />
           <div>
-            حساب کاربری ندارید؟
-            <Link href={"/register"}>ثبت نام کنید</Link>
+            حساب کاربری دارید؟
+            <Link href={"/login"}>وارد شوید</Link>
           </div>
         </div>
       </div>
