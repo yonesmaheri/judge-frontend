@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import apiCall from "../api";
 
 const getQuestions = async () => {
@@ -23,5 +23,51 @@ export const useQuestion = (id: string) => {
     queryKey: ["question", id],
     queryFn: () => getQuestion(id),
     enabled: !!id,
+  });
+};
+
+const submitAnswer = async ({
+  questionId,
+  file,
+}: {
+  questionId: string;
+  file: File;
+}) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("questionId", questionId);
+
+  const res = await apiCall.post(
+    `/questions/${questionId}/submissions`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return res.data;
+};
+
+export const useSubmitAnswer = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: submitAnswer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["submissions"] });
+    },
+  });
+};
+
+const getSubmissions = async (questionId: string) => {
+  const res = await apiCall.get(`/questions/${questionId}/submissions`);
+  return res.data;
+};
+
+export const useSubmissions = (questionId: string) => {
+  return useQuery({
+    queryKey: ["submissions", questionId],
+    queryFn: () => getSubmissions(questionId),
+    enabled: !!questionId,
   });
 };
