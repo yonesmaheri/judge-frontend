@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import apiCall from "../api";
+import { CreateQuestionInput } from "@/types/question";
+import toast from "react-hot-toast";
 
 const getQuestions = async () => {
   const res = await apiCall.get("/questions");
@@ -69,5 +71,25 @@ export const useSubmissions = (questionId: string) => {
     queryKey: ["submissions", questionId],
     queryFn: () => getSubmissions(questionId),
     enabled: !!questionId,
+  });
+};
+
+
+const createQuestion = async (data: CreateQuestionInput) => {
+  const res = await apiCall.post("/questions", data);
+  return res.data;
+};
+
+export const useCreateQuestion = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createQuestion,
+    onSuccess: () => {
+      toast.success("سوال جدید ایجاد شد", {
+        position: "bottom-center",
+      });
+      queryClient.invalidateQueries({ queryKey: ["questions"] });
+    },
   });
 };
