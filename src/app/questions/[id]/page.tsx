@@ -8,6 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import apiCall from "@/lib/api";
 import { useQuestion, useSubmissions } from "@/lib/services/questions";
 import SubmissionForm from "@/components/template/questions/submitForm";
+import { Progress } from "@/components/ui/progress";
+import { DataTable } from "@/components/module/table";
+import { columns } from "@/components/template/questions/columns";
 
 const getMe = async () => {
   const res = await apiCall.get("/auth/me");
@@ -70,24 +73,14 @@ export default function QuestionDetailPage() {
                 <CardTitle>ارسال‌های من</CardTitle>
               </CardHeader>
               <CardContent>
-                <TabsContent value="submissions">
-                  {isLoadingSubmissions ? (
-                    <p>Loading...</p>
-                  ) : submissions?.length ? (
-                    submissions.map((sub: any) => (
-                      <div key={sub.id} className="p-4 border rounded mb-2">
-                        <p>فایل: {sub.filePath.split("/").pop()}</p>
-                        <p>وضعیت: {sub.status}</p>
-                        <p>
-                          تاریخ ارسال:{" "}
-                          {new Date(sub.createdAt).toLocaleString()}
-                        </p>
-                      </div>
-                    ))
-                  ) : (
-                    <p>ارسالی وجود ندارد.</p>
-                  )}
-                </TabsContent>
+                {isLoadingSubmissions ? (
+                  <p>در حال بارگذاری...</p>
+                ) : submissions?.length ? (
+                  <DataTable columns={columns} data={submissions} />
+                ) : (
+                  <p>ارسالی وجود ندارد.</p>
+                )}
+
                 <SubmissionForm questionId={id as string} />
               </CardContent>
             </Card>

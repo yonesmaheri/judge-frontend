@@ -19,7 +19,7 @@ export default function SubmitForm({ questionId }: { questionId: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
       <Controller
         name="file"
         control={control}
