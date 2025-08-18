@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
-  const authPages = ["/login", "/register"];
+  const authPages = ["/login", "/register", "/questions/add"];
 
   if (authPages.includes(url.pathname)) {
     try {
@@ -12,18 +12,17 @@ export async function middleware(req: NextRequest) {
         headers: {
           Cookie: req.headers.get("cookie") || "",
         },
-      })
-      
+      });
+
       if (res.ok) {
         url.pathname = "/";
         return NextResponse.redirect(url);
       }
-    } catch (err) {
-    }
+    } catch (err) {}
   }
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/login", "/register"],
+  matcher: ["/login", "/register", "/questions/add"],
 };
