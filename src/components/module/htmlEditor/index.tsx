@@ -44,7 +44,7 @@ export default function HtmlEditor({ value, onChange }: Props) {
       // مقدار اولیه
       quillRef.current.root.innerHTML = value || "";
     }
-  }, [editorRef]);
+  }, [editorRef, value, onChange]);
 
   return <div ref={editorRef} className="min-h-[200px] bg-white" />;
 }

@@ -37,13 +37,12 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function CreateQuestionForm() {
-  const { mutate, isPending } = useCreateQuestion();
+  const { mutate } = useCreateQuestion();
   const router = useRouter();
   const {
     register,
     control,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),

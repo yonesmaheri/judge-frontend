@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Vazirmatn } from "next/font/google";
+// import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import { ReactQueryProvider } from "@/components/module/provider";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/module/navbar";
 
-const vazir = Vazirmatn({
-  variable: "--font-vazir",
-  subsets: ["latin"],
-});
+// const vazir = Vazirmatn({
+//   variable: "--font-vazir",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "سیستم داوری",
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${vazir.className} bg-gray-100 text-gray-900 antialiased`}
+        className={` bg-gray-100 text-gray-900 antialiased`}
       >
         <ReactQueryProvider>
           <Navbar/>

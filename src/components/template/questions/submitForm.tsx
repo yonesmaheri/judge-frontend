@@ -3,7 +3,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useSubmissions, useSubmitAnswer } from "@/lib/services/questions";
+import {  useSubmitAnswer } from "@/lib/services/questions";
 
 type FormSchema = {
   file: FileList;

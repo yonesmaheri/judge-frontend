@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import apiCall from "@/lib/api";
 import { useQuestion, useSubmissions } from "@/lib/services/questions";
 import SubmissionForm from "@/components/template/questions/submitForm";
-import { Progress } from "@/components/ui/progress";
 import { DataTable } from "@/components/module/table";
 import { columns } from "@/components/template/questions/columns";
 

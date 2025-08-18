@@ -20,7 +20,7 @@ export default function QuestionsPage() {
       <div className="grid gap-4 max-w-[1280px] mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold ">لیست سوالات</h1>
-          {data && (
+          {me && (
             <Button asChild>
               <Link href={"/questions/add"}> افزودن سوال جدید</Link>
             </Button>
