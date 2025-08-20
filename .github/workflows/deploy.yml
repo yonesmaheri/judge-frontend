@@ -23,5 +23,6 @@ jobs:
           script: |
             cd ~/judge/judge-frontend || exit 1
             git pull origin main
-            docker compose down
-            docker compose up -d --build
+            cd ../
+            docker-compose down
+            docker-compose up -d --build
