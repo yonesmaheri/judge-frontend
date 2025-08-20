@@ -87,7 +87,7 @@ export default function QuestionDetailPage() {
         </Tabs>
       ) : (
         // فقط سوال اگر لاگین نیست
-        <Card>
+        <Card dir="rtl">
           <CardHeader className="flex items-center justify-between">
             <CardTitle className="text-xl font-bold">
               {question.title}
