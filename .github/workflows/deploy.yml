@@ -19,6 +19,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22   # اگر پورت SSH غیر از 22 هست اینجا تغییر بده
           script: |
             cd ~/judge/frontend || exit 1
             git pull origin main
