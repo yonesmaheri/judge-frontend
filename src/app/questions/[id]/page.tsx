@@ -107,7 +107,7 @@ export default function QuestionDetailPage() {
           <CardContent>
             <div
               className="prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: question.text }}
+              dangerouslySetInnerHTML={{ __html: question.description }}
             />
           </CardContent>
         </Card>
