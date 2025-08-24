@@ -1,56 +1,60 @@
 "use client";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import LoginPage from "@/components/template/login";
+import RegisterPage from "@/components/template/register";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useLogin } from "@/lib/services/auth";
-import LoginPageTemplate from "@/components/template/login";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
-const loginSchema = z.object({
-  username: z.string().min(3, "وارد کردن نام کاربری الزامی است"),
-  password: z.string().min(6, "رمز عبور باید حداقل ۶ کاراکتر باشد"),
-});
-
-export type LoginFormData = z.infer<typeof loginSchema>;
-
-export default function LoginPage() {
-  const router = useRouter();
-
-  const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      username: "",
-      password: "",
-    },
-  });
-
-  const { mutate, isPending } = useLogin();
-
-  const onSubmit = (values: LoginFormData) => {
-    mutate(values, {
-      onSuccess() {
-        router.push("/");
-      },
-    });
-  };
+export default function Login() {
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div dir="rtl" className="flex justify-center items-center h-screen">
-      <div className="w-96 bg-white shadow-md rounded p-6">
-        <div className="w-full flex flex-col items-center justify-center gap-4">
-          <LoginPageTemplate
-            form={form}
-            isPending={isPending}
-            onSubmit={onSubmit}
-          />
-          <div>
-            حساب کاربری ندارید؟
-            <Link href={"/register"}>ثبت نام کنید</Link>
-          </div>
+    <motion.div
+      className="h-full relative w-[400px] mx-auto mt-10"
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      {/* دکمه‌ها */}
+      <div className="flex justify-center mb-4">
+        <div className="inline-flex rounded-lg shadow-md overflow-hidden">
+          <button
+            onClick={() => setIsLogin(true)}
+            className={`px-4 py-2 text-sm font-medium transition-colors ${
+              isLogin
+                ? "bg-blue-500 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
+            }`}
+          >
+            Sign in
+          </button>
+          <button
+            onClick={() => setIsLogin(false)}
+            className={`px-4 py-2 text-sm font-medium transition-colors ${
+              !isLogin
+                ? "bg-blue-500 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
+            }`}
+          >
+            Sign up
+          </button>
         </div>
       </div>
-    </div>
+
+      {/* باکس انیمیشن کارت */}
+      <div className="relative w-full h-full perspective-[1000px]">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={isLogin ? "login" : "register"}
+            initial={{ rotateY: isLogin ? -180 : 180, opacity: 0 }}
+            animate={{ rotateY: 0, opacity: 1 }}
+            exit={{ rotateY: isLogin ? 180 : -180, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute w-full h-full backface-hidden"
+          >
+            {isLogin ? <LoginPage /> : <RegisterPage />}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </motion.div>
   );
 }

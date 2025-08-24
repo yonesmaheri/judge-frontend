@@ -1,77 +1,54 @@
-import { RegisterFormData } from "@/app/register/page";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import React from "react";
-import { UseFormReturn } from "react-hook-form";
+"use client";
 
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRegister } from "@/lib/services/auth";
+import { useRouter } from "next/navigation";
+import RegisterPageTemplate from "./form";
 
-type Props = {
-  form: UseFormReturn<RegisterFormData>
-  isPending:boolean
-  onSubmit: (data:any)=> void
-}
+const registerSchema = z.object({
+  name: z.string().min(3, "Enter your full name"),
+  username: z.string().min(3, "Username must contain at least 3 characters"),
+  password: z.string().min(6, "Password must contain at least 6 characters"),
+});
 
-function RegisterPageTemplate({form,isPending,onSubmit}:Props) {
+export type RegisterFormData = z.infer<typeof registerSchema>;
+
+export default function RegisterPage() {
+
+  const router = useRouter()
+
+  const form = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      username: "",
+      password: "",
+    },
+  });
+
+  const { mutate, isPending } = useRegister();
+
+  const onSubmit = (values: RegisterFormData) => {
+    mutate(values,{
+      onSuccess() {
+        router.push('/')
+      },
+    });
+  };
+
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>نام</FormLabel>
-              <FormControl>
-                <Input placeholder="نام خود را وارد کنید" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>نام کاربری</FormLabel>
-              <FormControl>
-                <Input placeholder="نام کاربری را وارد کنید" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>رمز عبور</FormLabel>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="رمز عبور را وارد کنید"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" disabled={isPending}>
-          {isPending ? "..." : "ثبت نام"}
-        </Button>
-      </form>
-    </Form>
+    <div className="flex justify-center items-center h-1/2">
+      <div className="w-96 bg-white shadow-md rounded-xl p-6">
+        <div className="w-full flex flex-col items-center justify-center gap-4">
+          <RegisterPageTemplate
+            form={form}
+            isPending={isPending}
+            onSubmit={onSubmit}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
-
-export default RegisterPageTemplate;

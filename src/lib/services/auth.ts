@@ -19,7 +19,7 @@ export const useLogin = () => {
       });
       queryClient.invalidateQueries({ queryKey: ["me"] });
     },
-    onError(error: any, variables, context) {
+    onError(error: any) {
       toast.error(error.response.data.message, {
         position: "bottom-center",
       });
@@ -45,7 +45,7 @@ export const useRegister = () => {
       });
       queryClient.invalidateQueries({ queryKey: ["me"] });
     },
-    onError(error: any, variables, context) {
+    onError(error: any) {
       toast.error(error.response.data.message, {
         position: "bottom-center",
       });
