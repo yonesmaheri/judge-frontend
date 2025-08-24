@@ -11,8 +11,8 @@ import Navbar from "@/components/module/navbar";
 // });
 
 export const metadata: Metadata = {
-  title: "سیستم داوری",
-  description: "سیستم داوری آنلاین کد های برنامه نویسی",
+  title: "Yones Maheri - Portfolio",
+  description: "Yones Maheri - Frontend and python developer",
 };
 
 export default function RootLayout({
