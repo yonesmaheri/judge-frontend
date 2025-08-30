@@ -10,6 +10,7 @@ import { useQuestion, useSubmissions } from "@/lib/services/questions";
 import SubmissionForm from "@/components/template/questions/submitForm";
 import { DataTable } from "@/components/module/table";
 import { columns } from "@/components/template/questions/columns";
+import Link from "next/link";
 
 const getMe = async () => {
   const res = await apiCall.get("/auth/me");
@@ -109,6 +110,12 @@ export default function QuestionDetailPage() {
               className="prose max-w-none"
               dangerouslySetInnerHTML={{ __html: question.description }}
             />
+            <div className="mt-10 border w-fit p-4 rounded shadow">
+              جهت ارسال پاسخ سوال ابتدا وارد
+              <Link className="underline text-blue-900" href={"/login"}>
+                شوید
+              </Link>
+            </div>
           </CardContent>
         </Card>
       )}

@@ -3,6 +3,7 @@ import PersonalInfo from "./personalInfo";
 import Experience from "./experience";
 import Skills from "./skills";
 import About from "./about";
+import CertificatesSection from "./certificates";
 
 function ResumeTemplate() {
   return (
@@ -10,8 +11,8 @@ function ResumeTemplate() {
       <PersonalInfo /> 
       <About/>
       <Experience />
-
       <Skills />
+      <CertificatesSection/>
     </div>
   );
 }
