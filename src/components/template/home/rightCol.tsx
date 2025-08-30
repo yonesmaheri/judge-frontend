@@ -28,10 +28,10 @@ function RightCol() {
           Download CV
         </a>
         <a
-          href="/projects"
+          href="/resume"
           className="px-6 py-3 text-[12px] lg:text-base rounded-full border border-gray-300 font-medium hover:bg-gray-100 transition"
         >
-          View Projects
+          View Resume
         </a>
       </div>
     </motion.div>
