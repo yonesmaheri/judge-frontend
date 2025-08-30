@@ -3,11 +3,11 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
-  const authPages = ["/login", "/register", "/questions/add"];
+  const authPages = ["/login"];
 
   if (authPages.includes(url.pathname)) {
     try {
-      const res = await fetch("/api/auth/me", {
+      const res = await fetch("https://yonesma.ir/api/auth/me", {
         method: "GET",
         headers: {
           Cookie: req.headers.get("cookie") || "",
