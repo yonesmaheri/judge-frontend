@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
 
   if (authPages.includes(url.pathname)) {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/me", {
+      const res = await fetch("/api/auth/me", {
         method: "GET",
         headers: {
           Cookie: req.headers.get("cookie") || "",
