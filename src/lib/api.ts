@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiCall = axios.create({
-  baseURL: "/api",
+  baseURL: "https://yonesma.ir/api",
   withCredentials: true,
   timeout: 10000,
 });

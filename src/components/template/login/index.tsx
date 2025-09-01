@@ -29,7 +29,14 @@ export default function LoginPage() {
 
   const onSubmit = (values: LoginFormData) => {
     mutate(values, {
-      onSuccess() {
+      onSuccess: async (data) => {
+        await fetch("back/auth/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token: data.token }),
+        });
         router.push("/");
       },
     });

@@ -16,8 +16,7 @@ const registerSchema = z.object({
 export type RegisterFormData = z.infer<typeof registerSchema>;
 
 export default function RegisterPage() {
-
-  const router = useRouter()
+  const router = useRouter();
 
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
@@ -31,9 +30,16 @@ export default function RegisterPage() {
   const { mutate, isPending } = useRegister();
 
   const onSubmit = (values: RegisterFormData) => {
-    mutate(values,{
-      onSuccess() {
-        router.push('/')
+    mutate(values, {
+      onSuccess: async (data) => {
+        await fetch("back/auth/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token: data.token }),
+        });
+        router.push("/");
       },
     });
   };
