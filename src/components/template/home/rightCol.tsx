@@ -8,10 +8,10 @@ function RightCol() {
       transition={{ duration: 1, delay: 0.2 }}
       className="mt-10 md:mt-0 md:ml-16 w-full md:w-1/2 text-center md:text-left"
     >
-      <h2 className="text-2xl md:text-5xl font-bold mb-6">
+      <h2 className="text-2xl md:text-5xl font-bold mb-6 text-white">
         Hi, welcome to my portfolio 👋
       </h2>
-      <p className="text-[12px] lg:text-base text-gray-700 leading-relaxed mb-8">
+      <p className="text-[12px] lg:text-base text-white leading-relaxed mb-8">
         I’m a frontend and Python developer, constantly improving my skills in
         data science, web development, and modern technologies. I enjoy creating
         clean, interactive web apps and learning new tools to solve challenging
@@ -29,7 +29,7 @@ function RightCol() {
         </a>
         <a
           href="/resume"
-          className="px-6 py-3 text-[12px] lg:text-base rounded-full border border-gray-300 font-medium hover:bg-gray-100 transition"
+          className="px-6 py-3 text-[12px] lg:text-base text-white rounded-full border border-gray-300 font-medium  transition"
         >
           View Resume
         </a>

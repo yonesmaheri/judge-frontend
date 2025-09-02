@@ -26,11 +26,15 @@ export default function Navbar() {
       initial={{ width: 0, opacity: 0 }}
       animate={{ width: "100%", opacity: 1 }}
       transition={{ duration: 1.2, ease: "easeInOut" }}
-      className="lg:max-w-[1280px] max-w-[95%] mx-auto my-7 p-3 rounded-full border-b bg-white shadow-sm"
+      className={`${
+        pathname === "/" && "text-white"
+      } lg:max-w-[1280px] max-w-[95%] mx-auto my-7 p-3 rounded-full bg-white/10 backdrop-blur-[5px] shadow-sm`}
     >
       <div className="flex items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-bold text-lg whitespace-nowrap">Yones Maheri</span>
+          <span className="font-bold text-lg whitespace-nowrap">
+            Yones Maheri
+          </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
@@ -39,7 +43,11 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                pathname === link.href ? "text-blue-600" : "text-gray-700"
+                pathname === link.href
+                  ? "text-blue-600"
+                  : pathname === "/"
+                  ? "text-white"
+                  : "text-gray-700"
               }`}
             >
               {link.label}
