@@ -62,7 +62,7 @@ export default function Navbar() {
             <span className="text-sm font-medium">{user.name}</span>
           ) : (
             <Link href="/login">
-              <Button variant="outline">Sign up / Sign in</Button>
+              <Button className="text-black" variant="outline">Sign up / Sign in</Button>
             </Link>
           )}
         </div>
