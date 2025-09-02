@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+
 "use client";
 
 import { useEffect, useRef } from "react";
