@@ -55,7 +55,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="hidden md:block">
+        {/* <div className="hidden md:block">
           {isLoading ? (
             <Skeleton className="h-6 w-24" />
           ) : user ? (
@@ -65,7 +65,7 @@ export default function Navbar() {
               <Button className="text-black" variant="outline">Sign up / Sign in</Button>
             </Link>
           )}
-        </div>
+        </div> */}
 
         <div className="md:hidden">
           <Sheet open={open} onOpenChange={setOpen}>
@@ -95,7 +95,7 @@ export default function Navbar() {
                     </Link>
                   ))}
                 </div>
-                <div className="my-4">
+                {/* <div className="my-4">
                   {isLoading ? (
                     <Skeleton className="h-6 w-24" />
                   ) : user ? (
@@ -105,7 +105,7 @@ export default function Navbar() {
                       <Button className="w-full">Sign up / Sign in</Button>
                     </Link>
                   )}
-                </div>
+                </div> */}
               </div>
             </SheetContent>
           </Sheet>
