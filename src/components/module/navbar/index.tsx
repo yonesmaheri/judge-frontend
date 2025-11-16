@@ -22,40 +22,42 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <motion.nav
-      initial={{ width: 0, opacity: 0 }}
-      animate={{ width: "100%", opacity: 1 }}
-      transition={{ duration: 1.2, ease: "easeInOut" }}
-      className={`${
-        pathname === "/" && "text-white"
-      } lg:max-w-[1280px] max-w-[95%] mx-auto my-7 p-3 rounded-full bg-white/10 backdrop-blur-[5px] shadow-sm`}
-    >
-      <div className="flex items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-bold text-lg whitespace-nowrap">
-            Yones Maheri
-          </span>
-        </Link>
-
-        <div className="hidden md:flex items-center gap-6">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                pathname === link.href
-                  ? "text-blue-600"
-                  : pathname === "/"
-                  ? "text-white"
-                  : "text-gray-700"
-              }`}
-            >
-              {link.label}
+    <>
+      <div className="liquid-glass">
+        <motion.nav
+          initial={{ width: 0, opacity: 0 }}
+          animate={{ width: "100%", opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className={`${
+            pathname === "/" && "text-black"
+          } lg:max-w-[1280px] max-w-[95%] content-wrapper mx-auto my-7 p-3 `}
+        >
+          <div className="flex items-center justify-between px-4 py-3">
+            <Link href="/" className="flex items-center gap-2">
+              <span className="font-bold text-lg whitespace-nowrap">
+                Yones Maheri
+              </span>
             </Link>
-          ))}
-        </div>
 
-        {/* <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-6">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                    pathname === link.href
+                      ? "text-blue-600"
+                      : pathname === "/"
+                      ? "text-black"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* <div className="hidden md:block">
           {isLoading ? (
             <Skeleton className="h-6 w-24" />
           ) : user ? (
@@ -67,35 +69,35 @@ export default function Navbar() {
           )}
         </div> */}
 
-        <div className="md:hidden">
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left">
-              <SheetHeader>
-                <Link href={"/"}>Yones Maheri</Link>
-              </SheetHeader>
-              <div className="flex h-full flex-col justify-between mt-6 px-4">
-                <div className="flex flex-col gap-2">
-                  {links.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setOpen(false)} // 👈 شیت رو می‌بندیم
-                      className={`border p-4 rounded-xl text-sm font-medium transition-all hover:text-blue-600 ${
-                        pathname === link.href
-                          ? "text-blue-600 bg-blue-100"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-                {/* <div className="my-4">
+            <div className="md:hidden">
+              <Sheet open={open} onOpenChange={setOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left">
+                  <SheetHeader>
+                    <Link href={"/"}>Yones Maheri</Link>
+                  </SheetHeader>
+                  <div className="flex h-full flex-col justify-between mt-6 px-4">
+                    <div className="flex flex-col gap-2">
+                      {links.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setOpen(false)} // 👈 شیت رو می‌بندیم
+                          className={`border p-4 rounded-xl text-sm font-medium transition-all hover:text-blue-600 ${
+                            pathname === link.href
+                              ? "text-blue-600 bg-blue-100"
+                              : "text-gray-700"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                    {/* <div className="my-4">
                   {isLoading ? (
                     <Skeleton className="h-6 w-24" />
                   ) : user ? (
@@ -106,11 +108,40 @@ export default function Navbar() {
                     </Link>
                   )}
                 </div> */}
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
+        </motion.nav>
       </div>
-    </motion.nav>
+      <svg xmlns="http://www.w3.org/2000/svg" style={{ display: "none" }}>
+        <defs>
+          <filter
+            id="glass-distortion"
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.006 0.006"
+              numOctaves="2"
+              seed="92"
+              result="noise"
+            />
+            <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="blurred"
+              scale="99"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
+    </>
   );
 }

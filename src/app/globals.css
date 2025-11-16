@@ -133,3 +133,39 @@
   100% { background-position: 0% 50%; }
 }
 .animate-gradient { animation: gradientMove 8s ease infinite; }
+
+.liquid-glass {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 30px;
+  isolation: isolate;
+  z-index: 0;
+}
+
+/* --- Background Glass Layers --- */
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  box-shadow: inset 0 0 8px -5px #000000;
+}
+
+.liquid-glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  backdrop-filter: blur(3px);
+  filter: url(#glass-distortion);
+}
+
+/* --- Content must be above the effect --- */
+.content-wrapper {
+  position: relative;
+  z-index: 5;  /* مهم */
+}
+

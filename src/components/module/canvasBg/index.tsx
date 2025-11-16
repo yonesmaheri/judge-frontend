@@ -26,7 +26,7 @@ export default function CanvasBackground() {
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
     // ==== Config ====
-    const particleCount = 300;
+    const particleCount = 750;
     const particlePropCount = 9;
     const particlePropsLength = particleCount * particlePropCount;
     const rangeY = 100;
@@ -35,14 +35,14 @@ export default function CanvasBackground() {
     const baseSpeed = 0.1;
     const rangeSpeed = 2;
     const baseRadius = 1;
-    const rangeRadius = 4;
+    const rangeRadius = 4;  
     const baseHue = 220;
     const rangeHue = 100;
     const noiseSteps = 8;
     const xOff = 0.00125;
     const yOff = 0.00125;
     const zOff = 0.0005;
-    const backgroundColor = "hsla(260,40%,5%,1)";
+    // const backgroundColor = "hsla(260,40%,5%,1)";
 
     let center: number[] = [];
     let tick = 0;
@@ -152,7 +152,7 @@ export default function CanvasBackground() {
 
       tick++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = backgroundColor;
+      ctx.fillStyle = 'white';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       for (let i = 0; i < particlePropsLength; i += particlePropCount) {
